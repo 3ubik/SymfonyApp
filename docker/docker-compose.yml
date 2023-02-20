@@ -11,7 +11,7 @@ services:
         - PGID=${PGID}
         - INSTALL_XDEBUG=${INSTALL_XDEBUG}
     environment:
-      PHP_IDE_CONFIG: "serverName=Docker"
+      PHP_IDE_CONFIG: "serverName=SymfonyApp"
     volumes:
       - /var/www/vendor/
       - ./../:/var/www/
