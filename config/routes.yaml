@@ -8,3 +8,15 @@ kernel:
         path: ../src/Shared/Infrastructure/Kernel.php
         namespace: App\Shared\Infrastructure\Controller
     type: attribute
+api_login_check:
+    path: /api/login
+register:
+    path: /api/register
+    controller: App\Users\Infrastructure\Controller\CreateUser::register
+gesdinet_jwt_refresh_token:
+    path:       /api/token/refresh
+app_logout:
+    path: /logout
+users:
+    resource: ../src/Users/Infrastructure/Controller/
+    type: annotation

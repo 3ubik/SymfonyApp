@@ -28,5 +28,14 @@ services:
         App\Shared\Application\Query\QueryHandlerInterface:
             tags:
                 - { name: messenger.message_handler, bus: query.bus }
+
+    acme_api.event.jwt_decoded_listener:
+        class: App\Users\Infrastructure\EventListener\JWTDecodedEventListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_decoded, method: onJWTDecoded }
+
+    App\Users\Infrastructure\Controller\:
+        resource: '../src/Users/Infrastructure/Controller/'
+        tags: [ 'controller.service_arguments' ]
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

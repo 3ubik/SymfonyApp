@@ -2,8 +2,10 @@
 
 namespace App\Users\Domain\Entity;
 
+use App\Shared\Domain\Security\AuthUserInterface;
 use App\Shared\Domain\Service\UlidSerice;
-class User
+use App\Users\Domain\Service\UserPasswordHasherInterface;
+class User implements AuthUserInterface
 {
     private string $ulid;
     private string $email;
@@ -29,6 +31,34 @@ class User
     public function getPassword(): ?string
     {
         return $this->password;
+    }
+
+    public function getRoles(): array
+    {
+        return [
+            'ROLE_USER',
+        ];
+    }
+
+    public function eraseCredentials(): void
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->email;
+    }
+
+    public function setPassword(
+        ?string $password,
+        UserPasswordHasherInterface $passwordHasher
+    ): void {
+        if (is_null($password)) {
+            $this->password = null;
+        }
+
+        $this->password = $passwordHasher->hash($this, $password);
     }
 
 
